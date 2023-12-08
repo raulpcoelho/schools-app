@@ -13,13 +13,15 @@ export class FavoriteService {
     return this.favoriteSchools;
   }
 
-  toggleFavorite(school: any): void {
+  toggleFavorite(school: any): boolean { //return true if added, false if removed
     const index = this.favoriteSchools.findIndex((favSchool) => favSchool.coEntidade === school.coEntidade);
 
     if (index !== -1) {
       this.favoriteSchools.splice(index, 1);
+      return false;
     } else {
       this.favoriteSchools.push(school);
+      return true;
     }
   }
 }

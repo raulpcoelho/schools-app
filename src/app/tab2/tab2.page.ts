@@ -12,16 +12,17 @@ import { ToastController } from '@ionic/angular';
 export class Tab2Page {
 
   schools: any[];
-  private page: number;
+  favoriteSchools: any[];
   noResults: boolean;
   search: string;
 
 
   constructor(private apiService: ApiService, private favoriteService: FavoriteService, public toastController: ToastController) {
-    this.page = 1;
     this.noResults = false;
     this.schools = [];
     this.search = "";
+    this.favoriteSchools = this.favoriteService.getFavoriteSchools();
+    ;
   }
 
   searchSchools() {
@@ -36,29 +37,28 @@ export class Tab2Page {
         if (!data || Object.keys(data).length === 0)
           this.noResults = true;
         else {
-          let newValues: any[] = [];
-          newValues = newValues.concat(data).map(school => ({ ...school, liked: false }));
-          this.schools = newValues;
+          this.schools = this.schools.concat(data);
           this.noResults = false;
         }
       },
       error: err => console.error({ "Error": err })
     });
-    this.page++;
   }
 
 
   async like(index: number) {
-    this.schools[index].isLiked = !this.schools[index].isLiked;
-    this.favoriteService.toggleFavorite(this.schools[index]);
-    const message: string = this.schools[index].isLiked ? "Escola adicionada aos favoritos" :
-      "Escola removida dos favoritos";
+    const added = this.favoriteService.toggleFavorite(this.schools[index]);
+    const message: string = added ? "Escola adicionada aos favoritos" : "Escola removida dos favoritos";
     const toast = await this.toastController.create({
       message,
       duration: 2000,
       position: "top"
     });
     toast.present();
+  }
+
+  checkFavorite(id : number) {
+    return this.favoriteSchools.some(obj => obj.coEntidade === id);
   }
 
 }

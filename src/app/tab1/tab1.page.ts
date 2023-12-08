@@ -10,6 +10,7 @@ import { FavoriteService } from '../services/favorite.service';
 })
 export class Tab1Page implements OnInit {
   schools: any[];
+  favoriteSchools: any[];
   private page: number;
   last: boolean;
 
@@ -18,10 +19,12 @@ export class Tab1Page implements OnInit {
     this.page = 1;
     this.last = false;
     this.schools = [];
+    this.favoriteSchools=[];
   }
 
   ngOnInit() {
     this.listSchools();
+    this.favoriteSchools = this.favoriteService.getFavoriteSchools();
   }
 
   listSchools() {
@@ -30,9 +33,7 @@ export class Tab1Page implements OnInit {
         if (!data || Object.keys(data).length === 0)
           this.last = true;
         else {
-          let newValues: any[] = [];
-          newValues = newValues.concat(data).map(school => ({ ...school, liked: false }));
-          this.schools = this.schools.concat(newValues);
+          this.schools = this.schools.concat(data);
         }
       },
       error: err => console.error({ "Error": err })
@@ -41,10 +42,8 @@ export class Tab1Page implements OnInit {
   }
 
   async like(index: number) {
-    this.schools[index].isLiked = !this.schools[index].isLiked;
-    this.favoriteService.toggleFavorite(this.schools[index]);
-    const message: string = this.schools[index].isLiked ? "Escola adicionada aos favoritos" :
-      "Escola removida dos favoritos";
+    const added = this.favoriteService.toggleFavorite(this.schools[index]);
+    const message: string = added ? "Escola adicionada aos favoritos" : "Escola removida dos favoritos";
     const toast = await this.toastController.create({
       message,
       duration: 2000,
@@ -53,6 +52,8 @@ export class Tab1Page implements OnInit {
     toast.present();
   }
 
-
+  checkFavorite(id : number) {
+    return this.favoriteSchools.some(obj => obj.coEntidade === id);
+  }
 }
 

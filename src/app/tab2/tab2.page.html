@@ -28,9 +28,8 @@
         </ion-label>
 
         <ion-icon
-          [name]="school.isLiked ? 'star' : 'star-outline'"
+          [name]="checkFavorite(school.coEntidade) ? 'star' : 'star-outline'"
           slot="end"
-          [class.liked]="school.isLiked"
           (click)="like(i)"
         ></ion-icon>
       </ion-item>
