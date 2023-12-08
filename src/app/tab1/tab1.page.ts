@@ -1,3 +1,4 @@
+import { ToastController } from '@ionic/angular';
 import { ApiService } from './../services/api.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -12,7 +13,7 @@ export class Tab1Page implements OnInit {
   last: boolean;
 
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, public toastController: ToastController) {
     this.page = 1;
     this.last = false;
     this.schools = [];
@@ -34,4 +35,15 @@ export class Tab1Page implements OnInit {
     });
     this.page++;
   }
+
+  async like(id:number) {
+    const toast = await this.toastController.create({
+      message: `Escola favoritada: ${id}`,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+
 }
+

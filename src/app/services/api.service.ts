@@ -13,8 +13,8 @@ export class ApiService {
     return this.http.get(url);
   }
 
-  getSchoolById(id: number) {
-    const url = `${this.apiUrl}?coEntidade=${id}`;
+  getSchoolById(id: string) {
+    const url = `${this.apiUrl}?coEntidade=${parseInt(id)}`;
     return this.http.get(url);
   }
 

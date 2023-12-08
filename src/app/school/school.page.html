@@ -1,13 +1,22 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>school</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalhes da Escola</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">school</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card>
+      <ion-item>
+        <ion-label *ngIf="school !== null && school !== undefined">
+          <ion-text color="primary">
+            <h2>{{school[0]?.noEntidade}}</h2>
+          </ion-text>
+          <p>{{school[0]?.noMunicipio}} - {{school[0]?.sgUf}}</p>
+        </ion-label>
+
+      </ion-item>
+  </ion-card>
 </ion-content>
