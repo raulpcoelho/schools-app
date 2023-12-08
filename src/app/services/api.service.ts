@@ -8,8 +8,8 @@ export class ApiService {
   private apiUrl = `http://157.230.55.217/api/escolas`;
   constructor(private http : HttpClient) { }
 
-  getSchools(){
-    const url = `${this.apiUrl}?page=1`;
+  getSchools(page: number){
+    const url = `${this.apiUrl}?page=${page}`;
     return this.http.get(url);
   }
 }
