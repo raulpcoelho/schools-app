@@ -10,19 +10,30 @@
       <ion-list-header>
         <ion-label> <h1>Todas as escolas</h1></ion-label>
       </ion-list-header>
-      <ion-item *ngFor="let school of schools" [routerLink]="['/school/' + school.coEntidade]">
-        <ion-label>
+      <ion-card-subtitle slot="end">Clique em um item para ver detalhes</ion-card-subtitle>
+      <ion-item *ngFor="let school of schools; let i = index">
+        <ion-label
+          [routerLink]="['/school/' + school.coEntidade]"
+          title="Ver detalhes"
+        >
           <ion-text color="primary">
             <h2>{{school.noEntidade}}</h2>
           </ion-text>
           <p>{{school.noMunicipio}} - {{school.sgUf}}</p>
         </ion-label>
 
-        <ion-icon name="star-outline" slot="end" (click)="like(school.coEntidade)"></ion-icon>
+        <ion-icon
+          [name]="school.isLiked ? 'star' : 'star-outline'"
+          slot="end"
+          [class.liked]="school.isLiked"
+          (click)="like(school.coEntidade, i)"
+        ></ion-icon>
       </ion-item>
     </ion-list>
   </ion-card>
   <div class="center-button">
-    <ion-button *ngIf="!last" shape="round" (click)="listSchools()">Ver mais</ion-button>
+    <ion-button *ngIf="!last" shape="round" (click)="listSchools()"
+      >Ver mais</ion-button
+    >
   </div>
 </ion-content>

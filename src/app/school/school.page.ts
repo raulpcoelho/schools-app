@@ -16,6 +16,10 @@ export class SchoolPage implements OnInit {
     this.id = null;
   }
 
+  static formatTel(tel: number){
+    return `${tel.toString().slice(0, 4)}-${tel.toString().slice(4, 8)}`;
+  }
+
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if (this.id !== null) {
@@ -23,6 +27,7 @@ export class SchoolPage implements OnInit {
         next: data => {
           if (data && Object.keys(data).length > 0)
             this.school = data;
+            this.school[0].nuTelefone = SchoolPage.formatTel(this.school[0].nuTelefone);
         },
         error: err => console.error({ "Error": err })
       });

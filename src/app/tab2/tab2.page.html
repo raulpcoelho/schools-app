@@ -1,11 +1,39 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>
-      Pesquisar
-    </ion-title>
+    <ion-title> Pesquisar </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-searchbar
+    show-clear-button="focus"
+    placeholder="Busque por nome ou código inep"
+    [(ngModel)]="search"
+  ></ion-searchbar>
+  <div class="search-button">
+    <ion-button shape="round" (click)="searchSchools()"> Buscar </ion-button>
+  </div>
 
+  <ion-card>
+    <ion-list *ngIf="schools.length > 0">
+      <ion-item *ngFor="let school of schools; let i = index">
+        <ion-label
+          [routerLink]="['/school/' + school.coEntidade]"
+          title="Ver detalhes"
+        >
+          <ion-text color="primary">
+            <h2>{{school.noEntidade}}</h2>
+          </ion-text>
+          <p>{{school.noMunicipio}} - {{school.sgUf}}</p>
+        </ion-label>
+
+        <ion-icon
+          [name]="school.isLiked ? 'star' : 'star-outline'"
+          slot="end"
+          [class.liked]="school.isLiked"
+          (click)="like(school.coEntidade, i)"
+        ></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 </ion-content>

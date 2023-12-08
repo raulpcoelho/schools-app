@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
-  schools: any;
+  schools: any[];
   private page: number;
   last: boolean;
 
@@ -28,18 +28,25 @@ export class Tab1Page implements OnInit {
       next: data => {
         if (!data || Object.keys(data).length === 0)
           this.last = true;
-        else
-          this.schools = this.schools.concat(data);
+        else {
+          let newValues: any[] = [];
+          newValues = newValues.concat(data).map(school => ({ ...school, liked: false }));
+          this.schools = this.schools.concat(newValues);
+        }
       },
       error: err => console.error({ "Error": err })
     });
     this.page++;
   }
 
-  async like(id:number) {
+  async like(id: number, index: number) {
+    this.schools[index].isLiked = !this.schools[index].isLiked;
+    const message: string = this.schools[index].isLiked ? "Escola adicionada aos favoritos" :
+      "Escola removida dos favoritos";
     const toast = await this.toastController.create({
-      message: `Escola favoritada: ${id}`,
-      duration: 2000
+      message: `${message}: ${id}`,
+      duration: 2000,
+      position: "middle"
     });
     toast.present();
   }
