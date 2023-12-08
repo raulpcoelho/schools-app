@@ -1,11 +1,30 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>
-      Favoritas
-    </ion-title>
+    <ion-title> Favoritas </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-list *ngIf="favoriteSchools.length > 0">
+      <ion-item *ngFor="let school of favoriteSchools; let i = index">
+        <ion-label
+          [routerLink]="['/school/' + school.coEntidade]"
+          title="Ver detalhes"
+        >
+          <ion-text color="primary">
+            <h2>{{school.noEntidade}}</h2>
+          </ion-text>
+          <p>{{school.noMunicipio}} - {{school.sgUf}}</p>
+        </ion-label>
 
+        <ion-icon
+          name="star"
+          slot="end"
+          [class.liked]="school.isLiked"
+          (click)="dislike(school)"
+        ></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 </ion-content>

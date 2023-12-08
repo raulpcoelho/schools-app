@@ -1,3 +1,4 @@
+import { FavoriteService } from './../services/favorite.service';
 import { Component } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { ToastController } from '@ionic/angular';
@@ -16,7 +17,7 @@ export class Tab2Page {
   search: string;
 
 
-  constructor(private apiService: ApiService, public toastController: ToastController) {
+  constructor(private apiService: ApiService, private favoriteService: FavoriteService, public toastController: ToastController) {
     this.page = 1;
     this.noResults = false;
     this.schools = [];
@@ -26,10 +27,9 @@ export class Tab2Page {
   searchSchools() {
     this.schools = [];
     let f;
-    console.log('Search:', this.search);
     if (Number.isInteger(Number(this.search)))
       f = this.apiService.getSchoolById(this.search);
-    else 
+    else
       f = this.apiService.getSchoolByName(this.search);
     f.subscribe({
       next: data => {
@@ -38,7 +38,7 @@ export class Tab2Page {
         else {
           let newValues: any[] = [];
           newValues = newValues.concat(data).map(school => ({ ...school, liked: false }));
-          this.schools = newValues
+          this.schools = newValues;
           this.noResults = false;
         }
       },
@@ -48,14 +48,15 @@ export class Tab2Page {
   }
 
 
-  async like(id: number, index: number) {
+  async like(index: number) {
     this.schools[index].isLiked = !this.schools[index].isLiked;
+    this.favoriteService.toggleFavorite(this.schools[index]);
     const message: string = this.schools[index].isLiked ? "Escola adicionada aos favoritos" :
       "Escola removida dos favoritos";
     const toast = await this.toastController.create({
-      message: `${message}: ${id}`,
+      message,
       duration: 2000,
-      position: "middle"
+      position: "top"
     });
     toast.present();
   }

@@ -1,6 +1,7 @@
 import { ToastController } from '@ionic/angular';
 import { ApiService } from './../services/api.service';
 import { Component, OnInit } from '@angular/core';
+import { FavoriteService } from '../services/favorite.service';
 
 @Component({
   selector: 'app-tab1',
@@ -13,7 +14,7 @@ export class Tab1Page implements OnInit {
   last: boolean;
 
 
-  constructor(private apiService: ApiService, public toastController: ToastController) {
+  constructor(private apiService: ApiService, private favoriteService: FavoriteService, public toastController: ToastController) {
     this.page = 1;
     this.last = false;
     this.schools = [];
@@ -39,14 +40,15 @@ export class Tab1Page implements OnInit {
     this.page++;
   }
 
-  async like(id: number, index: number) {
+  async like(index: number) {
     this.schools[index].isLiked = !this.schools[index].isLiked;
+    this.favoriteService.toggleFavorite(this.schools[index]);
     const message: string = this.schools[index].isLiked ? "Escola adicionada aos favoritos" :
       "Escola removida dos favoritos";
     const toast = await this.toastController.create({
-      message: `${message}: ${id}`,
+      message,
       duration: 2000,
-      position: "middle"
+      position: "top"
     });
     toast.present();
   }

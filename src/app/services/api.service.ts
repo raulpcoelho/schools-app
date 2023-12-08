@@ -19,7 +19,6 @@ export class ApiService {
   }
 
   getSchoolByName(name: string) {
-    console.log(this)
     const url = `${this.apiUrl}?noEntidade=${name}`;
     return this.http.get(url);
   }
