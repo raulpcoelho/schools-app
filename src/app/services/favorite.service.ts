@@ -1,27 +1,44 @@
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FavoriteService {
-
   private favoriteSchools: any[] = [];
+
+  constructor(private storage: Storage) {
+    this.createStorage();
+  }
   
-  constructor() { }
+  async createStorage() {
+    await this.storage.create();
+  }
+
+  async storageInit() {
+    const storedFavorites = await this.storage.get('favoriteSchools');
+    this.favoriteSchools = storedFavorites || [];
+    console.log(this.favoriteSchools);
+  }
 
   getFavoriteSchools(): any[] {
     return this.favoriteSchools;
   }
 
-  toggleFavorite(school: any): boolean { //return true if added, false if removed
-    const index = this.favoriteSchools.findIndex((favSchool) => favSchool.coEntidade === school.coEntidade);
+  async toggleFavorite(school: any): Promise<boolean> {
+    //return true if added, false if removed
+    const index = this.favoriteSchools.findIndex(
+      (favSchool) => favSchool.coEntidade === school.coEntidade
+    );
+    const flag: boolean = index === -1;
 
-    if (index !== -1) {
-      this.favoriteSchools.splice(index, 1);
-      return false;
+    if (!flag) {
+      this.favoriteSchools.splice(index, 1);      
     } else {
       this.favoriteSchools.push(school);
-      return true;
     }
+    await this.storage.set('favoriteSchools', this.favoriteSchools);
+    return flag;
   }
+
 }
