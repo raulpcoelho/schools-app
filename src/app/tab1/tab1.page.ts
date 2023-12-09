@@ -17,7 +17,7 @@ export class Tab1Page implements OnInit {
   constructor(
     private apiService: ApiService,
     private favoriteService: FavoriteService,
-    public toastController: ToastController
+    public toastController: ToastController,
   ) {
     this.page = 1;
     this.last = false;
@@ -46,7 +46,9 @@ export class Tab1Page implements OnInit {
   }
 
   async like(index: number) {
-    const added = await this.favoriteService.toggleFavorite(this.schools[index]);
+    const added = await this.favoriteService.toggleFavorite(
+      this.schools[index],
+    );
     const message: string = added
       ? 'Escola adicionada aos favoritos'
       : 'Escola removida dos favoritos';

@@ -5,8 +5,8 @@ const config: CapacitorConfig = {
   appName: 'schools',
   webDir: 'www',
   server: {
-    androidScheme: 'http'
-  }
+    androidScheme: 'http',
+  },
 };
 
 export default config;

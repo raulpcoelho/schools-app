@@ -11,11 +11,20 @@ import { ApiService } from './services/api.service';
 import { FavoriteService } from './services/favorite.service';
 import { IonicStorageModule } from '@ionic/storage-angular';
 
-
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ApiService, FavoriteService],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    IonicStorageModule.forRoot(),
+  ],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ApiService,
+    FavoriteService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

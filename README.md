@@ -5,20 +5,26 @@ Este é um aplicativo Android desenvolvido usando Ionic com Capacitor. Ele forne
 ## Como Rodar o Aplicativo
 
 1. Clone o Repositório:
+
 ```
 git clone https://github.com/seu-usuario/nome-do-repositorio.git
 ```
 
 2. Instale as Dependências:
-Na pasta do repositório, execute:
+   Na pasta do repositório, execute:
+
 ```
 npm install
 ```
+
 3. Construa o Projeto Ionic:
+
 ```
 ionic build
 ```
+
 4. Inicie o Servidor de Desenvolvimento:
+
 ```
 ionic serve
 ```
@@ -40,7 +46,7 @@ Isso iniciará um servidor de desenvolvimento. Abra seu navegador e acesse http:
 - Clique na estrela para favoritar uma escola.
 
 ### Aba "Favoritas"
+
 - Todas as escolas favoritas são listadas nesta aba.
 - Clique em uma escola para ver mais detalhes.
 - Clique na estrela para remover uma escola dos favoritos.
-

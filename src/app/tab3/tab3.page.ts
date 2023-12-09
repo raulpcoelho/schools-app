@@ -6,15 +6,18 @@ import { ApiService } from '../services/api.service';
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  styleUrls: ['tab3.page.scss'],
 })
-export class Tab3Page  {
-
+export class Tab3Page {
   favoriteSchools: any[] = [];
 
-  constructor(private favoriteService: FavoriteService, private apiService: ApiService, public toastController: ToastController) { }
+  constructor(
+    private favoriteService: FavoriteService,
+    private apiService: ApiService,
+    public toastController: ToastController,
+  ) {}
 
-  async ionViewWillEnter(){
+  async ionViewWillEnter() {
     await this.favoriteService.storageInit();
     this.favoriteSchools = this.favoriteService.getFavoriteSchools();
   }
@@ -27,13 +30,12 @@ export class Tab3Page  {
 
   async dislike(school: any) {
     await this.favoriteService.toggleFavorite(school);
-    const message: string = "Escola removida dos favoritos";
+    const message: string = 'Escola removida dos favoritos';
     const toast = await this.toastController.create({
       message,
       duration: 2000,
-      position: "top"
+      position: 'top',
     });
     toast.present();
   }
-
 }

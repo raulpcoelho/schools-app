@@ -10,7 +10,7 @@ export class FavoriteService {
   constructor(private storage: Storage) {
     this.createStorage();
   }
-  
+
   async createStorage() {
     await this.storage.create();
   }
@@ -28,17 +28,16 @@ export class FavoriteService {
   async toggleFavorite(school: any): Promise<boolean> {
     //return true if added, false if removed
     const index = this.favoriteSchools.findIndex(
-      (favSchool) => favSchool.coEntidade === school.coEntidade
+      (favSchool) => favSchool.coEntidade === school.coEntidade,
     );
     const flag: boolean = index === -1;
 
     if (!flag) {
-      this.favoriteSchools.splice(index, 1);      
+      this.favoriteSchools.splice(index, 1);
     } else {
       this.favoriteSchools.push(school);
     }
     await this.storage.set('favoriteSchools', this.favoriteSchools);
     return flag;
   }
-
 }
