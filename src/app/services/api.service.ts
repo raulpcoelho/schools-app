@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = `http://157.230.55.217/api/escolas`;
+  private apiUrl = `http://localhost:3000/api/schools`;
   constructor(private http: HttpClient) {}
 
   getSchools(page: number) {
@@ -14,7 +14,7 @@ export class ApiService {
   }
 
   getSchoolById(id: string) {
-    const url = `${this.apiUrl}?coEntidade=${parseInt(id)}`;
+    const url = `${this.apiUrl}/${id}`;
     return this.http.get(url);
   }
 

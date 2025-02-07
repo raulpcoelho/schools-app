@@ -28,9 +28,7 @@ export class SchoolPage implements OnInit {
       this.apiService.getSchoolById(this.id).subscribe({
         next: (data) => {
           if (data && Object.keys(data).length > 0) this.school = data;
-          this.school[0].nuTelefone = SchoolPage.formatTel(
-            this.school[0].nuTelefone,
-          );
+          this.school.nuTelefone = SchoolPage.formatTel(this.school.nuTelefone);
         },
         error: (err) => console.error({ Error: err }),
       });
