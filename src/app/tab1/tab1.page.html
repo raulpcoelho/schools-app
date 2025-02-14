@@ -1,15 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title> Escolas </ion-title>
+    <ion-title
+      class="ion-text-center"
+      style="display: flex; align-items: center; justify-content: center"
+    >
+      <ion-icon aria-hidden="true" name="home-outline"></ion-icon>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-list>
-      <ion-list-header>
-        <ion-label> <h1>Todas as escolas</h1></ion-label>
-      </ion-list-header>
       <ion-card-subtitle slot="end"
         >Clique em um item para ver detalhes</ion-card-subtitle
       >
