@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage-angular';
 export class FavoriteService {
   private favoriteSchools: any[] = [];
 
-  constructor(private storage: Storage) {
+  constructor(private readonly storage: Storage) {
     this.createStorage();
   }
 

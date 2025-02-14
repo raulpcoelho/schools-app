@@ -4,7 +4,11 @@
       class="ion-text-center"
       style="display: flex; align-items: center; justify-content: center"
     >
-      <ion-icon aria-hidden="true" name="home-outline"></ion-icon>
+      <ion-icon
+        aria-hidden="true"
+        name="home-outline"
+        style="font-size: 32px"
+      ></ion-icon>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -30,12 +34,17 @@
           [name]="checkFavorite(school.coEntidade) ? 'star' : 'star-outline'"
           slot="end"
           (click)="like(i)"
+          onkeypress="like(i)"
         ></ion-icon>
       </ion-item>
     </ion-list>
   </ion-card>
   <div class="center-button">
-    <ion-button *ngIf="!last" shape="round" (click)="listSchools()"
+    <ion-button
+      *ngIf="!last"
+      shape="round"
+      (click)="listSchools()"
+      onkeypress="listSchools()"
       >Ver mais</ion-button
     >
   </div>

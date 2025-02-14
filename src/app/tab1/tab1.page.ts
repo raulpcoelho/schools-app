@@ -15,8 +15,8 @@ export class Tab1Page implements OnInit {
   last: boolean;
 
   constructor(
-    private apiService: ApiService,
-    private favoriteService: FavoriteService,
+    private readonly apiService: ApiService,
+    private readonly favoriteService: FavoriteService,
     public toastController: ToastController,
   ) {
     this.page = 1;

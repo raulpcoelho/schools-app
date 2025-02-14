@@ -15,8 +15,8 @@ export class Tab2Page implements OnInit {
   search: string;
 
   constructor(
-    private apiService: ApiService,
-    private favoriteService: FavoriteService,
+    private readonly apiService: ApiService,
+    private readonly favoriteService: FavoriteService,
     public toastController: ToastController,
   ) {
     this.noResults = false;

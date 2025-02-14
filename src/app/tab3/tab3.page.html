@@ -4,7 +4,11 @@
       class="ion-text-center"
       style="display: flex; align-items: center; justify-content: center"
     >
-      <ion-icon aria-hidden="true" name="star-outline"></ion-icon>
+      <ion-icon
+        aria-hidden="true"
+        name="star-outline"
+        style="font-size: 32px"
+      ></ion-icon>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -28,11 +32,15 @@
           slot="end"
           [class.liked]="school.isLiked"
           (click)="dislike(school)"
+          onkeyup="dislike(school)"
         ></ion-icon>
       </ion-item>
     </ion-list>
   </ion-card>
-  <p *ngIf="favoriteSchools.length === 0" class="ion-text-center">
-    Você ainda não possui favoritas <ion-icon name="sad-outline"></ion-icon>
-  </p>
+  <div *ngIf="favoriteSchools.length === 0" class="ion-text-center">
+    <p style="font-size: large">Você ainda não possui favoritas</p>
+    <div>
+      <ion-icon name="sad" style="font-size: 50px; color: #428cff"></ion-icon>
+    </div>
+  </div>
 </ion-content>
