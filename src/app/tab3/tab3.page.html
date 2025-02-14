@@ -1,6 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title> Favoritas </ion-title>
+    <ion-title
+      class="ion-text-center"
+      style="display: flex; align-items: center; justify-content: center"
+    >
+      <ion-icon aria-hidden="true" name="star-outline"></ion-icon>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -27,4 +32,7 @@
       </ion-item>
     </ion-list>
   </ion-card>
+  <p *ngIf="favoriteSchools.length === 0" class="ion-text-center">
+    Você ainda não possui favoritas <ion-icon name="sad-outline"></ion-icon>
+  </p>
 </ion-content>
