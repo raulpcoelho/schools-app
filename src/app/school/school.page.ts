@@ -12,8 +12,8 @@ export class SchoolPage implements OnInit {
   id: string | null;
 
   constructor(
-    private apiService: ApiService,
-    private activatedRoute: ActivatedRoute,
+    private readonly apiService: ApiService,
+    private readonly activatedRoute: ActivatedRoute,
   ) {
     this.id = null;
   }

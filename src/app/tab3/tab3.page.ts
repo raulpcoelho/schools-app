@@ -1,5 +1,5 @@
 import { ToastController } from '@ionic/angular';
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FavoriteService } from '../services/favorite.service';
 import { ApiService } from '../services/api.service';
 
@@ -12,8 +12,8 @@ export class Tab3Page {
   favoriteSchools: any[] = [];
 
   constructor(
-    private favoriteService: FavoriteService,
-    private apiService: ApiService,
+    private readonly favoriteService: FavoriteService,
+    private readonly apiService: ApiService,
     public toastController: ToastController,
   ) {}
 
