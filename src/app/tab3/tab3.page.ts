@@ -25,7 +25,6 @@ export class Tab3Page {
   async ngOnChanges() {
     await this.favoriteService.storageInit();
     this.favoriteSchools = this.favoriteService.getFavoriteSchools();
-    console.log(this.favoriteSchools);
   }
 
   async dislike(school: any) {
